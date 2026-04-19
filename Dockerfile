@@ -1,5 +1,5 @@
 # 第一个阶段用于根据架构复制文件
-FROM --platform=$TARGETPLATFORM alpine:3.19 AS builder
+FROM --platform=$TARGETPLATFORM alpine:latest AS builder
 
 # 设置构建参数
 ARG TARGETPLATFORM
@@ -19,15 +19,12 @@ RUN echo "Files in builder:" && ls -la
 # 检查文件是否存在并根据目标架构重命名二进制文件
 RUN ls -la && \
     if [ "$TARGETARCH" = "amd64" ]; then mv ./app/cfnat-linux-amd64 ./cfnat; \
-    elif [ "$TARGETARCH" = "386" ]; then mv ./app/cfnat-linux-386 ./cfnat; \
     elif [ "$TARGETARCH" = "arm64" ]; then mv ./app/cfnat-linux-arm64 ./cfnat; \
-    elif [ "$TARGETARCH" = "arm" ] && [ "$TARGETVARIANT" = "v6" ]; then mv ./app/cfnat-linux-armv6 ./cfnat; \
-    elif [ "$TARGETARCH" = "arm" ] && [ "$TARGETVARIANT" = "v7" ]; then mv ./app/cfnat-linux-armv7 ./cfnat; \
     else echo "无法识别架构，默认使用 amd64" && mv ./app/cfnat-linux-amd64 ./cfnat; \
     fi
 
 # 第二个阶段：运行阶段
-FROM --platform=$TARGETPLATFORM alpine:3.19
+FROM --platform=$TARGETPLATFORM alpine:latest
 
 # 复制构建阶段的文件到运行阶段
 COPY --from=builder /cfnat ./cfnat
