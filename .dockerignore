@@ -1,0 +1,7 @@
+.git
+.github
+dist
+locations.json
+ips-v4.txt
+ips-v6.txt
+*.log
