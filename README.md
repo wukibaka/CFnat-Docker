@@ -9,7 +9,7 @@ CFnat-Docker 是一个基于 Docker 的 Cloudflare IP 优选转发工具，自�
 ## 快速开始
 
 ```bash
-docker run -d --name mycfnat --restart always -p 1234:1234 wuki/cfnat:latest
+docker run -d --name mycfnat --restart always -p 1234:1234 wuki/cfnat:lang-go
 ```
 
 ## 参数说明
@@ -33,19 +33,19 @@ docker run -d --name mycfnat --restart always -p 1234:1234 wuki/cfnat:latest
 **香港数据中心，IPv6，延迟 160ms：**
 
 ```bash
-docker run -d -e colo="HKG" -e delay=160 -e ips=6 --restart always -p 1234:1234 wuki/cfnat:latest
+docker run -d -e colo="HKG" -e delay=160 -e ips=6 --restart always -p 1234:1234 wuki/cfnat:lang-go
 ```
 
 **香港数据中心，IPv4，端口 80，非 TLS，本地端口 8080：**
 
 ```bash
-docker run -d -e colo="HKG" -e delay=160 -e ips=4 -e port=80 -e tls=false --restart always -p 8080:1234 wuki/cfnat:latest
+docker run -d -e colo="HKG" -e delay=160 -e ips=4 -e port=80 -e tls=false --restart always -p 8080:1234 wuki/cfnat:lang-go
 ```
 
 **SJC/LAX 数据中心，IPv4，延迟 200ms：**
 
 ```bash
-docker run -d -e colo="SJC,LAX" -e delay=200 -e ips=4 --restart always -p 1234:1234 wuki/cfnat:latest
+docker run -d -e colo="SJC,LAX" -e delay=200 -e ips=4 --restart always -p 1234:1234 wuki/cfnat:lang-go
 ```
 
 ## Docker Compose
@@ -55,7 +55,7 @@ version: '3'
 services:
   cfnat:
     container_name: mycfnat
-    image: wuki/cfnat:latest
+    image: wuki/cfnat:lang-go
     environment:
       - colo=SJC,LAX,HKG
       - delay=300
